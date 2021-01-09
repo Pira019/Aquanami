@@ -31,7 +31,7 @@ public class Activity {
 	
 	@Id @GeneratedValue(strategy =GenerationType.IDENTITY)
 	private long id;
-	@NotBlank
+	
 	private String activityName;
 	private long pricePerHour;
 	private Date startDisponibility;
