@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head >
+<div th:replace="app/customer/templ/template :: myheader"></div>
+</head>
+<body>
+
+<div th:replace="app/customer/templ/template :: myMenu"></div>
+
+<!-- room-single-block -->
+<section class="room-single-block">
+    <div class="content-with-slider">
+        <div class="container">
+            <div class="content-photo-1 d-grid">
+                <div class="content-photo-left text-center">
+                    <h4 th:text="${data.activityName.toUpperCase()}"></h4>
+                    <h6 th:text="${data.categoryActivity.categoryType.substring(1)}"></h6>
+                    <div class="border-line">
+                        <div class="bg">
+                            <span class="price" th:text="${data.pricePerHour} + ' ' +Dh"></span>
+                            <p> Per hour</p>
+                        </div>
+                        <div class="book-btn px-2">
+                            <a th:href="@{/booking/new/{id}(id=${data.id})}" class="btn btn-style btn-secondary mt-3">Book Now</a>
+                        </div>
+                    </div>
+                    <ul class="room-amenities">
+                        <li><a href="#url"><i class="fa fa-clock-o" aria-hidden="true"></i> <span th:text="${data.startDisponibility} + ' - ' +${data.startDisponibility}" ></span></a></li>
+                        <li><a href="#url"><i class="fa fa-user" aria-hidden="true"></i> <span th:text="${data.provider.nameProvider}" ></span></a></li>
+                        <li><a href="#url"><i class="fa fa-phone-square" aria-hidden="true"></i> <span th:text="${data.provider.numContact}" ></span> </a></li>
+                         <li><a href="#url"><i class="fa fa-map-marker" aria-hidden="true"></i> <span th:text="${data.plage.name} +' , '+${data.plage.adress.city.name}" ></span> </a></li>
+                    </ul>
+                    
+                    <div class="mt-2"> 
+                    <h3> <p> <i class="fa fa-location-arrow" aria-hidden="true"></i> Adress </p> </h3>                    
+                    	<p> Name of place: <span th:text="${data.plage.adress.nameOfPlace}"></span></p>
+                    	<p> latitude: <span th:text="${data.plage.adress.latitude}"></span></p>
+                    	<p> longitude: <span th:text="${data.plage.adress.longitude}"></span></p>
+                    </div>
+                    <a href="room.html" class="back"> <span class="fa fa-long-arrow-left"></span> Back to all activities</a>
+                </div>
+                <div class="content-photo-right">
+                    <div class="csslider infinity" id="slider1">
+                        <input type="radio" name="slides" checked="checked" id="slides_1" />
+                        <input type="radio" name="slides" id="slides_2" />
+                        <input type="radio" name="slides" id="slides_3" />
+                        <input type="radio" name="slides" id="slides_4" />
+                        <ul class="banner_slide_bg"  th:each="pictures : ${data.pictures}">
+                            <li>
+                                <img class="img" th:src="@{'/uploads/'+${pictures.pathName}}" alt="">
+                            </li>
+                            <li>
+                                 
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                 
+                            </li>
+                        </ul>
+                        <div class="arrows">
+                            <label for="slides_1"></label>
+                            <label for="slides_2"></label>
+                            <label for="slides_3"></label>
+                            <label for="slides_4"></label>
+                        </div>
+                        <div class="navigation">
+                            <div>
+                                <label for="slides_1"></label>
+                                <label for="slides_2"></label>
+                                <label for="slides_3"></label>
+                                <label for="slides_4"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //room-single-block -->
+ 
+ <div th:replace="app/customer/templ/template :: foot"></div>
+</body>
+</html>

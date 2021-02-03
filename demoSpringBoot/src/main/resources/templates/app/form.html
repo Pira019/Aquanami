@@ -1,0 +1,254 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8">
+<div th:replace="app/customer/templ/template :: myheader"></div>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script >
+
+  $(function() {
+	  $('.categoryActivity').change(function(){
+	    $('.categorie').hide(); 
+	     
+	    if($(this).val()==" "){ 
+	    	 $('.categoryType' ).attr('required', 'required'); 
+	    	 $('#Autres' ).show();
+	    	 
+		    }
+	    
+	   
+	  });
+	});
+                            	 
+  </script>
+  
+ <style type="text/css">
+ img{
+  max-width:180px;
+}
+
+ input[type=file]{
+padding:10px;
+}
+ </style>
+</head>
+
+
+<body>
+
+<div  th:replace="app/customer/templ/template :: myMenu" ></div>
+
+<div  th:replace="app/customer/templ/template :: sectionctrl1" ></div>
+
+<section class="w3l-contact-1 py-5">
+    <div class="contacts-9 py-lg-5 py-sm-4">
+        <div class="container" style="text-align: center !important">
+          
+              
+            <div class="d-grid  "  >
+             
+               
+                <div class=" mt-lg-0 mt-4">
+                    <form action="#" th:action="@{${action}}" method="post" th:object="${userData}"  enctype="multipart/form-data" >
+                        
+                         
+                              
+                                <div th:if="${typeUser=='beach' }">
+                                
+                                <div >
+                               
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control" th:field="*{name}"
+                                placeholder="Name of beach *"  >
+                                
+                                <p th:if="${#fields.hasErrors('name')}" class="text-danger"
+														th:errors="*{name}"></p>
+                                </div>
+                                
+                                 <div class="twice"> 
+                                 
+                                 <select th:field="*{adress.city.name}"  class="form-control">
+                                 <option value="" selected="selected" hidden="hidden">Selectionnez une ville</option>
+								    <option th:each="city : ${cityData}" th:value="${city.name}" th:text="${city.name}"> 
+								       </option>
+								</select>
+ 
+                                </div>
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control" th:field="*{adress.quater}"
+                                placeholder="quater  *"  >
+                                
+                                <p th:if="${#fields.hasErrors('adress.quater')}" class="text-danger"
+														th:errors="*{adress.quater}"></p>
+                                </div>
+                                
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control" th:field="*{adress.nameOfPlace}"
+                                placeholder="Name of place Ex: Marina*"  >
+                                
+                                <p th:if="${#fields.hasErrors('adress.nameOfPlace')}" class="text-danger"
+														th:errors="*{adress.nameOfPlace}"></p>
+                                </div>
+                                
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control" th:field="*{adress.latitude}"
+                                placeholder="Latitude  *"  >
+                                
+                                <p th:if="${#fields.hasErrors('adress.latitude')}" class="text-danger"
+														th:errors="*{adress.latitude}"></p>
+                                </div>
+                                
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control" th:field="*{adress.longitude}"
+                                placeholder="longitude  *"  >
+                                
+                                <p th:if="${#fields.hasErrors('adress.longitude')}" class="text-danger"
+														th:errors="*{adress.longitude}"></p>
+                                </div>
+                               </div>
+                                 </div>
+                                 
+                                <div th:if="${typeUser=='activity' }">
+                                
+                                <div class="twice"> 
+                                 <input type="text" class="form-control" th:field="*{activityName}" required="required"
+                                placeholder="Votre le nom d'activité" >
+                                
+                                 <p th:if="${#fields.hasErrors('activityName')}" class="text-danger"
+														th:errors="*{activityName}"></p>
+                                
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <select th:field="*{plage.name}"  class="form-control " required="required">
+                                 <option value="" selected="selected" hidden="hidden">Selectionnez une plage</option>
+								    <option th:each="plage : ${plageData}" th:value="${plage.name}" th:text="${plage.name}"> 
+								       </option>
+								</select>
+ 								
+                                </div>
+                                
+                                
+                                <div class="twice"> 
+                                  
+                                <select th:field="*{categoryActivity.categoryType}"  class="form-control categoryActivity"  required="required">
+                                 <option value="" selected="selected" >Selectionnez une catégorie</option>
+								    <option th:each="category : ${categoryData}" th:value="${category.categoryType}" th:text="${category.categoryType}"> 
+								       </option>
+								       <option value=" ">Autres</option>
+								</select>
+ 								
+                                </div>
+                              
+                                
+                                <div class="categorie" id="Autres" style="display: none"> 
+                              
+                                <div class="twice">
+                                 
+                                 
+                                   <input type="text" class="form-control categoryType"  th:field="*{categoryActivity.categoryType}" 
+                                placeholder="Categorie ..."  >
+                                <p th:if="${#fields.hasErrors('categoryActivity.categoryType')}" class="text-danger"
+														th:errors="*{categoryActivity.categoryType}"></p>
+														
+							 	</div>
+											 	
+								 	<div class="twice">
+                               
+                                 
+                                   <input type="text" class="form-control"  th:field="*{categoryActivity.description}"
+                                placeholder="description  ..."  >
+                                <p th:if="${#fields.hasErrors('categoryActivity.description')}" class="text-danger"
+														th:errors="*{categoryActivity.description}"></p>
+														
+										</div>
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <input type="text" class="form-control"  th:field="*{pricePerHour}" required="required"
+                                placeholder="Price per hour"  >
+                                <p th:if="${#fields.hasErrors('pricePerHour')}" class="text-danger"
+														th:errors="*{pricePerHour}"></p>
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <input  type="time" class="form-control" th:field="*{startDisponibility}" required="required"
+                                placeholder="Début ou ouverture" >
+                                
+                                <p th:if="${#fields.hasErrors('startDisponibility')}" class="text-danger"
+														th:errors="*{startDisponibility}"></p>
+														
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <input type="time" class="form-control" th:field="*{endDisponibility}" required="required"
+                                placeholder="Fin ou fermeture"  >
+                                
+                                <p th:if="${#fields.hasErrors('endDisponibility')}" class="text-danger"
+														th:errors="*{endDisponibility}"></p>
+														
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <textarea   class="form-control" th:field="*{description}"  
+                                placeholder="Description">  </textarea>
+                                
+                                <p th:if="${#fields.hasErrors('description')}" class="text-danger"
+														th:errors="*{description}"></p>
+														
+                                </div>
+                                
+                                   
+                                <div class="twice"> 
+                                
+                                <input type="file" name="files" multiple class="form-control">
+														
+                                </div>
+                                
+                                
+                                </div>
+                                <div>
+                                <p class="text-danger"><span th:text="${message}"></span></p>
+                                </div>
+                                
+                                <div th:if="${typeUser=='activity'}">
+                                 <button type="reset" class="btn btn-warning">Reset</button>
+                                 <button type="submit" class="btn btn-contact">Enregistré cette activité</button>
+								 
+                                </div>
+                                
+                                <div th:if="${typeUser=='beach'}">
+                                <a class="btn btn-primary" th:href="@{/activity/new}" role="button">Add activity</a>
+                                 <button type="submit" class="btn btn-contact">Enregistré cette plage</button>
+                                </div>
+                                
+                                  
+                                 
+                                  
+                    </form>
+                    
+                        </div>
+                        
+                     
+                </div>  
+            </div>
+        </div>
+    </div>
+</section>
+
+
+ <div th:replace="app/customer/templ/template :: foot"></div>
+
+</body>
+</html>

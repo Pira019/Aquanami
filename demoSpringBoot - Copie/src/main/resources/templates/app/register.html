@@ -1,0 +1,157 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<div th:replace="app/customer/templ/template :: myheader"></div>
+ 
+ <script type="text/javascript">
+ var password = document.getElementById("user.login")
+ , confirm_password = document.getElementById("user.passwordConfirm");
+
+function validatePassword(){
+ if(password.value != confirm_password.value) {
+   confirm_password.setCustomValidity("Passwords Don't Match");
+ } else {
+   confirm_password.setCustomValidity('');
+ }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+</head>
+<body>
+
+<div  th:replace="app/customer/templ/template :: myMenu" ></div>
+
+<div  th:replace="app/customer/templ/template :: sectionctrl" ></div>
+
+<section class="w3l-contact-1 py-5">
+    <div class="contacts-9 py-lg-5 py-sm-4">
+        <div class="container" style="text-align: center !important">
+          
+              
+            <div class="d-grid  "  >
+             
+               
+                <div class=" mt-lg-0 mt-4">
+                    <form action="#" th:action="@{${action}}" method="post" th:object="${userData}">
+                        
+                        <div class="twice">
+                            <input type="email" class="form-control"  th:field="*{user.login}" 
+                                placeholder="Email *" required="required" >
+                                
+                              <p th:if="${#fields.hasErrors('user.login')}" class="text-danger"
+														th:errors="*{user.login}"></p>  
+                          </div>      
+                          <div class="twice">      
+                                <input type="password" class="form-control" th:field="*{user.password}"
+                                placeholder="Password *"  required="required">
+                                
+                             <p th:if="${#fields.hasErrors('user.password')}" class="text-danger"
+														th:errors="*{user.password}"></p>    
+                            </div>
+                            
+                            <div class="twice">      
+                                <input type="password" class="form-control" th:field="*{user.passwordConfirm}"
+                                placeholder="Confirm Password *"  required="required">
+                                
+                             <p th:if="${#fields.hasErrors('user.passwordConfirm')}" class="text-danger"
+														th:errors="*{user.passwordConfirm}"></p>    
+                            </div>  
+                              
+                                <div th:if="${typeUser=='admin' || typeUser=='customer' }">
+                                
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control" th:field="*{firstName}"
+                                placeholder="Prénom *"  >
+                                
+                                <p th:if="${#fields.hasErrors('firstName')}" class="text-danger"
+														th:errors="*{firstName}"></p>
+                                </div>
+                                
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control" th:field="*{lastName}"
+                                placeholder="Nom *"  >
+                                
+                                <p th:if="${#fields.hasErrors('lastName')}" class="text-danger"
+														th:errors="*{lastName}"></p>
+                                
+                                </div>
+                                
+                                 <div class="twice"> 
+                                 
+                                <input type="text" class="form-control"  th:field="*{telNumber}"
+                                placeholder="Numéro "  >
+                                
+                                <p th:if="${#fields.hasErrors('telNumber')}" class="text-danger"
+														th:errors="*{telNumber}"></p>
+                                </div>
+                                
+                                  
+                                 </div>
+                                 
+                                <div th:if="${typeUser=='provider' }">
+                                
+                                <div class="twice"> 
+                                 <input type="text" class="form-control" th:field="*{nameProvider}"
+                                placeholder="Votre nom" >
+                                
+                                 <p th:if="${#fields.hasErrors('nameProvider')}" class="text-danger"
+														th:errors="*{nameProvider}"></p>
+                                
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <input type="text" class="form-control"  th:field="*{licenseNumber}"
+                                placeholder="Numèro de licence "  >
+                                <p th:if="${#fields.hasErrors('licenseNumber')}" class="text-danger"
+														th:errors="*{licenseNumber}"></p>
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <input type="text" class="form-control" th:field="*{typeProvider}"
+                                placeholder="Type de founisseur" >
+                                
+                                <p th:if="${#fields.hasErrors('typeProvider')}" class="text-danger"
+														th:errors="*{typeProvider}"></p>
+														
+                                </div>
+                                
+                                <div class="twice"> 
+                                
+                                <input type="text" class="form-control" th:field="*{numContact}"
+                                placeholder="Numèro de tel"  >
+                                
+                                <p th:if="${#fields.hasErrors('numContact')}" class="text-danger"
+														th:errors="*{numContact}"></p>
+														
+                                </div>
+                                 
+                                </div>
+                                <div>
+                                <p class="text-danger"><span th:text="${message}"></span></p>
+                                </div>
+                                 <button type="submit" class="btn btn-contact">Valider</button>
+                                 
+                                  
+                    </form>
+                    
+                        </div>
+                        
+                     
+                </div>  
+            </div>
+        </div>
+    </div>
+</section>
+
+
+ <div th:replace="app/customer/templ/template :: foot"></div>
+
+</body>
+</html>

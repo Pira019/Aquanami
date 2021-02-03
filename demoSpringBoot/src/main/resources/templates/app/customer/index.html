@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head >
+<div th:replace="app/customer/templ/template :: myheader"></div>
+</head>
+<body>
+
+<div th:replace="app/customer/templ/template :: myMenu"></div>
+
+
+<!-- //w3l-header -->
+ <!-- main-slider -->
+ <section class="w3l-main-slider" id="home">
+     <div class="companies20-content">
+         <div class="owl-one owl-carousel owl-theme">
+             <div class="item">
+                 <li>
+                     <div class="slider-info banner-view bg bg2">
+                         <div class="banner-info">
+                             <div class="container">
+                                 <div class="banner-info-bg">
+                                     <h5>Location is heavenly. Best to visit in week days to enjoy the peaceful beauty
+                                     </h5>
+                                     <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
+                                         Services</a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </li>
+             </div>
+             <div class="item">
+                 <li>
+                     <div class="slider-info  banner-view banner-top1 bg bg2">
+                         <div class="banner-info">
+                             <div class="container">
+                                 <div class="banner-info-bg">
+                                     <h5>Our new hotels will play a leading role in prompting the world peace.</h5>
+                                     <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
+                                         Services</a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </li>
+             </div>
+             <div class="item">
+                 <li>
+                     <div class="slider-info banner-view banner-top2 bg bg2">
+                         <div class="banner-info">
+                             <div class="container">
+                                 <div class="banner-info-bg">
+                                     <h5>Most hotels train their people with the booklets. We take ours to the ballet.
+                                     </h5>
+                                     <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
+                                         Services</a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </li>
+             </div>
+             <div class="item">
+                 <li>
+                     <div class="slider-info banner-view banner-top3 bg bg2">
+                         <div class="banner-info">
+                             <div class="container">
+                                 <div class="banner-info-bg">
+                                     <h5>Good tourism will follow good hotels. Experience our luxury hotel rooms</h5>
+                                     <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
+                                         Services</a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </li>
+             </div>
+         </div>
+     </div>
+ </section>
+ 
+ 
+
+ <!-- /main-slider -->
+ 
+  <div class="best-rooms w3l-blog py-5" th:if="${activityList != null && !activityList.isEmpty()}">
+   <h3 class="title-big text-center">Best Activities</h3>
+    <div class="container py-lg-5 py-sm-4">
+        <div class="ban-content-inf row">
+        <table>
+        <tr>
+        </tr>
+        </table>
+            <div class="maghny-gd-1 col-lg-4 col-md-6" th:each="activity : ${activityList}">
+                <div class="maghny-grid">
+                    <figure class="effect-lily" th:each="pictures : ${activity.pictures}">
+                        <img class="img-fluid" th:src="@{'/uploads/'+${pictures.pathName}}">
+                        <figcaption> 
+                            <div>
+                                <h4 class="top-text" th:text="${activity.categoryActivity.categoryType.substring(1)}"> 
+                                    <ul>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star-o"></span></li>
+                                    </ul>
+                                </h4>
+                                <p>Book for <span th:text="${activity.pricePerHour} + ' ' +Dh"></span></p>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <div class="room-info">
+ 
+                        <h3 class="room-title"><a th:href="@{/detail/{id}(id=${activity.id})}" th:text="${activity.activityName.toUpperCase()}"></a></h3>
+                        <ul class="mb-3">
+                            <li  ><i class="fa fa-clock-o" aria-hidden="true"></i>  <span th:text="${activity.startDisponibility} + ' - ' +${activity.startDisponibility}" ></span></li>
+                            <li ><i class="fa fa-money" aria-hidden="true"></i> <span th:text="${activity.pricePerHour} +Dh"> <span th:text="'/Hour'"></span></span></li>
+                        </ul>
+                        <p><i class="fa fa-map-marker" aria-hidden="true"></i> <span th:text="${activity.plage.name} +' , '+${activity.plage.adress.city.name}"></span></p>
+                        <a th:href="@{/booking/new/{id}(id=${activity.id})}" sec:authorize="hasAnyAuthority('Customer', 'Admin')" class="btn mt-sm-4 mt-3">Book Now</a>
+                        <div class="room-info-bottom"> 
+                            <a  class="btn view" th:href="@{/detail/{id}(id=${activity.id})}" >Full Info →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        
+        </div>
+        
+    </div>
+</div>
+ <div th:replace="app/customer/templ/template :: foot"></div>
+</body>
+</html>

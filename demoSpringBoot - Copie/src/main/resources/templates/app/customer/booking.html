@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head >
+<div th:replace="app/customer/templ/template :: myheader"></div>
+</head>
+<body>
+
+<div th:replace="app/customer/templ/template :: myMenu"></div>
+
+<!-- //w3l-header -->
+<section class="w3l-booking-top">
+    <!-- /form-16-section -->
+    <div class="booking-form-61">
+        <div class="container">
+            <div class="booking-top-gds">
+                <div class="booking-forms-16-info align-self">
+                    <h5>Your Reservation</h5>
+                    <h3 class="title-big">Select the activity, check for availability and book it.</h3>
+                     
+                </div>
+                <div class="form-right-inf">
+                    <div class="booking-form-content">
+                        <h6>Book Now</h6>
+                        <form action="#" class="book-depature-6 signin-form" th:action="@{/booking/save}" method="post" th:object="${bookingData}">
+                      
+                         <div class="d-grid grid-col-2 mt-3">
+                                <div class="hny-frm_grid">
+                                    <h5>City</h5>
+                                    <select th:field="*{activity.plage.adress.city.name}" required="required">
+                                     <option value="" selected="selected">Select a city</option>
+                                    <!--  <option th:value="${selectedActivityData.plage.adress.city.name}" selected="selected" th:if="${selectedActivityData != null}"  th:text="${selectedActivityData.plage.adress.city.name}"></option> -->
+                                      
+                                      <option th:each="city : ${cityData}" th:value="${city.name}" th:text="${city.name}"></option> 
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('activity.plage.adress.city.name')}" class="text-danger"
+														th:errors="*{activity.plage.adress.city.name}"></p>
+                                </div>
+                                <div class="hny-frm_grid">
+                                    <h5>Beach</h5>
+                                    <select th:field="*{activity.plage.name}" required="required">
+                                    
+                                      <option value="" selected="selected">Select a beach</option>                                     
+                                   <!--    <option th:value="${selectedActivityData.plage.name}" selected="selected" th:if="${selectedActivityData != null}"  th:text="${selectedActivityData.plage.name}"></option> -->
+                                       
+                                        
+                                        <option th:each="beach : ${plageData}" th:value="${beach.name}" th:text="${beach.name}"></option>
+                                    </select>
+                                    
+                                    <p th:if="${#fields.hasErrors('activity.plage.name')}" class="text-danger"
+														th:errors="*{activity.plage.name}"></p>
+                                </div>
+                            </div>
+                           <div class="d-grid grid-col-2 mt-3">
+                                <div class="hny-frm_grid">
+                                    <h5>Activity</h5>
+                                    <select th:field="*{activity.activityName}" required="required">
+                                     <option value="" selected="selected">Select a activity</option>
+                                  <!--    <option th:value="${selectedActivityData.activityName}" selected="selected" th:if="${selectedActivityData != null}"  th:text="${selectedActivityData.activityName}"></option> -->
+                                       
+                                        <option th:each="activity : ${activities}" th:value="${activity.activityName}" th:text="${activity.activityName}"></option> 
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('activity.activityName')}" class="text-danger"
+														th:errors="*{activity.activityName}"></p>
+                                </div>
+                                <div class="hny-frm_grid">
+                                    <h5>Nbr Person</h5>
+                                    <select th:field="*{nbrPerson}" >
+                                      <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
+                                        <option value="6">05</option>
+                                        <option value="7">06</option> 
+                                        <option value=">7">Plus</option>   
+                                    </select>
+                                    
+                                    <p th:if="${#fields.hasErrors('nbrPerson')}" class="text-danger"
+														th:errors="*{nbrPerson}"></p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid grid-col-2"> 
+                                <div class="hny-frm_grid">
+                                    <h5>Begin</h5>
+                                    <input class="date" th:field="*{startHour}" type="datetime-local" placeholder="Date" required="">
+                                    
+                                    <p th:if="${#fields.hasErrors('startHour')}" class="text-danger"
+														th:errors="*{startHour}"></p>
+                                </div>
+                                <div class="hny-frm_grid">
+                                    <h5>End</h5>
+                                    <input class="date" th:field="*{endHour}" type="datetime-local" placeholder="Date" required="">
+                                    
+                                    <p th:if="${#fields.hasErrors('endHour')}" class="text-danger"
+														th:errors="*{endHour}"></p>
+                                </div>
+                            </div>
+                            
+                            
+                            <button class="btn btn-style btn btn-danger book mt-3" type="reset">Reset</button>                            
+                            <a class="btn btn-style btn-success mt-3">Save and Book another</a>
+                            <button class="btn btn-style btn-secondary book mt-3">Book Now</button>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //form-16-section -->
+ 
+ <div th:replace="app/customer/templ/template :: foot"></div>
+</body>
+</html>

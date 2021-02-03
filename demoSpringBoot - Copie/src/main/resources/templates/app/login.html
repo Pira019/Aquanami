@@ -1,0 +1,67 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<div th:replace="app/customer/templ/template :: myheader"></div>
+ 
+</head>
+<body>
+
+<div  th:replace="app/customer/templ/template :: myMenu" ></div>
+
+<div  th:replace="app/customer/templ/template :: sectionctrl" ></div>
+
+<section class="w3l-contact-1 py-5">
+    <div class="contacts-9 py-lg-5 py-sm-4">
+        <div class="container" style="text-align: center !important">
+          
+              
+            <div class="d-grid  "  >
+             
+               
+                <div class=" mt-lg-0 mt-4">
+                    <form action="#" th:action="@{/login}" method="post"  >
+                        
+                        <div class="twice">
+                            <input type="email" class="form-control" name="email" 
+                                placeholder="Email *"  >
+                                
+                               
+                          </div>      
+                          <div class="twice">      
+                                <input type="password" class="form-control" name="password"
+                                placeholder="Password *"  >
+                                
+                                
+                            </div> 
+                              <div  th:if="${#request.getParameter('error') == 'true'}">
+        						<p style:color:red>Login Failed!!!</p> <br />
+       					  			Email ou Mot de pass incorrect
+    					 	 </div>
+                                 
+                             <div class="twice">      
+                               <input type="checkbox"  name="remember-me" />
+                            </div>     
+                                
+                                 <div>
+                                <p class="text-danger"><span th:text="${message}"></span></p>
+                                </div>
+                                 <button type="submit" class="btn btn-contact">Valider</button>
+                                 
+                                  
+                    </form>
+                    
+                        </div>
+                        
+                     
+                </div>  
+            </div>
+        </div>
+    </div>
+</section>
+
+
+ <div th:replace="app/customer/templ/template :: foot"></div>
+
+</body>
+</html>

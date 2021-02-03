@@ -1,0 +1,106 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8">
+<div th:replace="app/customer/templ/template :: myheader"></div>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script >
+
+  $(function() {
+	  $('.categoryActivity').change(function(){
+	    $('.categorie').hide();
+	    
+	    if($(this).val()==" "){
+	    	 $('#Autres' ).show();
+		    }
+	    
+	   
+	  });
+	});
+                            	 
+  </script>
+  
+ <style type="text/css">
+ img{
+  max-width:180px;
+}
+
+ input[type=file]{
+padding:10px;
+}
+ </style>
+</head>
+
+
+<body>
+
+<div  th:replace="app/customer/templ/template :: myMenu" ></div>
+ <div  th:replace="app/customer/templ/template :: sectionctrl1" ></div>
+
+<section class="w3l-contact-1 py-5">
+    <div class="contacts-9 py-lg-5 py-sm-4">
+        <div class="container" style="text-align: center !important">
+         
+          <div class="alert alert-success" role="alert"  th:if="${#request.getParameter('r') == 'sucess'}">
+			 <p ><span th:text="${message}"></span></p>
+			</div>
+              <div class="alert alert-danger" role="alert"  th:if="${#request.getParameter('r') == 'error'}">
+			 <p><span th:text="${message}"></span></p>
+			</div>
+            <div class="d-grid  "  >
+             
+               
+                <div class=" mt-lg-0 mt-4">
+                    <table class="table table-dark table-hover">
+ 						<thead>
+   								<tr>
+   								 <th scope="col">Ref.</th>
+						            <th scope="col">Name Activity</th>
+						            <th scope="col">Category</th>
+						            <th scope="col">Price per hour</th>
+						            <th scope="col">Hours</th>
+						            <th scope="col">Beach name</th>
+						            <th scope="col">Descr. activity</th>
+						             <th scope="col">Action</th>
+						        </tr>
+  						</thead>
+  						
+  						<tbody>
+    					<tr th:each="activity: ${activtyData}">
+    								<td scope="col" th:text="${activity.id}"></td>
+							        <td scope="col" th:text="${activity.activityName}"></td>
+							         <td scope="col" th:text="${activity.categoryActivity.categoryType}"></td>
+							        <td scope="col" th:text="${activity.pricePerHour} + Dh" ></td>
+							        <td scope="col" th:text="${activity.startDisponibility} + ' - ' +${activity.startDisponibility}"></td>							     
+							        <td scope="col" th:text="${activity.plage.name}"></td>
+							        <td scope="col" th:text="${activity.description}"></td>
+							        <td scope="col">
+							        <div>
+							        <a class="btn btn-success" th:href="@{/activity/edit/{id}(id=${activity.id})}" >Update</a>
+							        </div>
+							        
+							        <div>
+							         <a class="btn btn-primary" th:href="@{/activity/delete/{id}(id=${activity.id})}"  >Delete</a>
+							        </div>
+							        
+							        </td>
+							  </tr>
+					    
+ 				 </tbody>
+					</table>
+					<a class="btn btn-primary" th:href="@{/activity/new}">Add activity</a>
+                        </div>
+                        
+                     
+                </div>  
+            </div>
+        </div>
+      </div>
+</section>
+
+
+ <div th:replace="app/customer/templ/template :: foot"></div>
+
+</body>
+</html>

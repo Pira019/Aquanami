@@ -1,0 +1,130 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8">
+<div th:replace="app/customer/templ/template :: myheader"></div>
+ 
+</head>
+
+
+<body>
+
+<div  th:replace="app/customer/templ/template :: myMenu" ></div>
+
+<div  th:replace="app/customer/templ/template :: sectionctrl1" ></div>
+
+<section class="w3l-availability-form" id="booking">
+    <!-- /w3l-availability-form-section -->
+    <div class="w3l-availability-form-main py-5">
+        <div class="container pt-lg-3 pb-lg-5">
+            <div class="forms-top">
+                <div class="form-right">
+                    <div class="form-inner-cont">
+                        <h3 class="title-small">Check Availability</h3>
+                        <form action="https://demo.w3layouts.com/demos_new/template_demo/28-03-2020/hotels-liberty-demo_Free/1275019035/web/search-results.html" method="post" class="signin-form">
+                            <div class="row book-form">
+                                <div class="form-input col-md-4 col-sm-6 mt-3">
+                                    <label>Check-in Date</label>
+                                    <input type="date" name="" placeholder="Date" required="">
+                                </div>
+                                <div class="form-input col-md-4 col-sm-6 mt-3">
+                                    <label>Check-out Date</label>
+                                    <input type="date" name="" placeholder="Date" required="">
+                                </div>
+                                <div class="form-input col-md-4 col-sm-6 mt-3">
+                                    <label>Adults</label>
+                                    <select class="selectpicker">
+                                        <option>01</option>
+                                        <option>02</option>
+                                        <option>03</option>
+                                        <option>04</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-input col-md-4 col-sm-6 mt-3">
+                                    <label>Children</label>
+                                    <select class="selectpicker">
+                                        <option>01</option>
+                                        <option>02</option>
+                                        <option>03</option>
+                                        <option>04</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-input col-md-4 col-sm-6 mt-3">
+                                    <label>Price </label>
+                                    <input type="text" name="" placeholder="Max Price ($)" required />
+                                </div>
+                                <div class="bottom-btn col-md-4 col-sm-6 mt-3">
+                                    <label>Check availability </label>
+                                    <button class="btn btn-style btn-primary w-100 px-2">Check Availability</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <div class="best-rooms w3l-blog py-5" th:if="${activityList != null && !activityList.isEmpty()}">    
+    <div class="container py-lg-5 py-sm-4">
+        <div class="ban-content-inf row">
+         
+            <div class="maghny-gd-1 col-lg-4 col-md-6 mt-5" th:each="activity : ${activityList}">
+                <div class="maghny-grid">
+                    <figure class="effect-lily" th:each="pictures : ${activity.pictures}">
+                        <img class="img-fluid" th:src="@{'/uploads/'+${pictures.pathName}}">
+                        <figcaption> 
+                            <div>
+                                <h4 class="top-text" th:text="${activity.categoryActivity.categoryType.substring(1)}"> 
+                                    <ul>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star"></span></li>
+                                        <li> <span class="fa fa-star-o"></span></li>
+                                    </ul>
+                                </h4>
+                                <p>Book for <span th:text="${activity.pricePerHour} + ' ' +Dh"></span></p>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <div class="room-info">
+ 
+                        <h3 class="room-title"><a th:href="@{/detail/{id}(id=${activity.id})}" th:text="${activity.activityName.toUpperCase()}"></a></h3>
+                        <ul class="mb-3">
+                            <li  ><i class="fa fa-clock-o" aria-hidden="true"></i>  <span th:text="${activity.startDisponibility} + ' - ' +${activity.startDisponibility}" ></span></li>
+                            <li ><i class="fa fa-money" aria-hidden="true"></i> <span th:text="${activity.pricePerHour} +Dh"> <span th:text="'/Hour'"></span></span></li>
+                        </ul>
+                        <p><i class="fa fa-map-marker" aria-hidden="true"></i> <span th:text="${activity.plage.name} +' , '+${activity.plage.adress.city.name}"></span></p>
+                        <a th:href="@{/booking/new/{id}(id=${activity.id})}"  class="btn mt-sm-4 mt-3">Book Now</a>
+                        <div class="room-info-bottom"> 
+                            <a  class="btn view" th:href="@{/detail/{id}(id=${activity.id})}" >Full Info →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        
+        </div>
+        
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mt-5 mb-0">
+                 
+                <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                <a class="page-link page-number" th:href="@{|/activities/page/${pageNumbers}|}" th:text="${pageNumbers}">1</a>
+                </li>
+                
+            </ul>
+        </nav>
+        
+    </div>
+</div>
+ 
+ <div th:replace="app/customer/templ/template :: foot"></div>
+
+</body>
+</html>
