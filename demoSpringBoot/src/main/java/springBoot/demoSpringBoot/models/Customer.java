@@ -15,8 +15,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name="tbl_customer")
+@Entity 
 public class Customer extends Person {
 	
 	

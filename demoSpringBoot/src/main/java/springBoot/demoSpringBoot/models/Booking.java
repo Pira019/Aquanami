@@ -1,5 +1,7 @@
 package springBoot.demoSpringBoot.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -28,14 +30,14 @@ public class Booking {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long refence;
-	private Date dateBooking ;
-	private Date DayOfBooking;
+	private LocalDateTime dateBooking ;
+	//private Date DayOfBooking;
 	
 	@ManyToOne
     @JoinColumn(name="id_customer", nullable=false)
 	private Customer customer;
 	
-	@OneToMany(mappedBy = "booking")
+	@OneToMany(mappedBy = "booking",cascade = CascadeType.ALL)
     Set<BookingDetail> bookingDetails;
 	
 	
@@ -48,5 +50,101 @@ public class Booking {
 	public Booking() {
 		// TODO Auto-generated constructor stub
 	}
+
+
+
+	/**
+	 * @return the refence
+	 */
+	public long getRefence() {
+		return refence;
+	}
+
+
+
+	/**
+	 * @param refence the refence to set
+	 */
+	public void setRefence(long refence) {
+		this.refence = refence;
+	}
+
+
+
+	 
+
+
+
+	/**
+	 * @return the dateBooking
+	 */
+	public LocalDateTime getDateBooking() {
+		return dateBooking;
+	}
+
+
+
+	/**
+	 * @param dateBooking the dateBooking to set
+	 */
+	public void setDateBooking(LocalDateTime dateBooking) {
+		this.dateBooking = dateBooking;
+	}
+
+
+
+	/**
+	 * @return the customer
+	 */
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+
+	/**
+	 * @param customer the customer to set
+	 */
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
+
+	/**
+	 * @return the bookingDetails
+	 */
+	public Set<BookingDetail> getBookingDetails() {
+		return bookingDetails;
+	}
+
+
+
+	/**
+	 * @param bookingDetails the bookingDetails to set
+	 */
+	public void setBookingDetails(Set<BookingDetail> bookingDetails) {
+		this.bookingDetails = bookingDetails;
+	}
+
+
+
+	/**
+	 * @return the bill
+	 */
+	public Bill getBill() {
+		return bill;
+	}
+
+
+
+	/**
+	 * @param bill the bill to set
+	 */
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
+	
+	
 
 }

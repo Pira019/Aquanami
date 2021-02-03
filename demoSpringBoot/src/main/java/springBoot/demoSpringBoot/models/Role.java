@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -30,17 +31,17 @@ public class Role  {
 	@Column(name = "Role_Name", length = 30, nullable = false)
 	private String nameRole;
 	
-	@OneToMany(mappedBy = "role")
-    Set<UserRole> userRoles;
+	
+	@ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+	public Role(String nameRole) {
+		super();
+		this.nameRole = nameRole;
+	}
 
 	public Role() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Role(long id, String nameRole) {
-		super();
-		this.id = id;
-		this.nameRole = nameRole;
 	}
 
 	/**
@@ -72,18 +73,22 @@ public class Role  {
 	}
 
 	/**
-	 * @return the userRoles
+	 * @return the users
 	 */
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
+	public Set<User> getUsers() {
+		return users;
 	}
 
 	/**
-	 * @param userRoles the userRoles to set
+	 * @param users the users to set
 	 */
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
+
+	 
+
+	 
 	
 	
 	
